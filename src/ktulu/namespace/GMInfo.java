@@ -20,6 +20,7 @@ public class GMInfo extends Activity {
 		this.setContentView(R.layout.rozkladgracze);
 		LinearLayout l = (LinearLayout)this.findViewById(R.id.graczep);
 		Button bOk = (Button)this.findViewById(R.id.button1);
+		mediaPlayer = MediaPlayer.create(goraa, R.raw.ufokikrotkie);
 		l.removeView(bOk);
 		Button bUf = new Button(this);
 		bUf.setText("Sygnał ufoków");
@@ -27,15 +28,16 @@ public class GMInfo extends Activity {
 		bUf.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mediaPlayer = MediaPlayer.create(goraa, R.raw.ufokikrotkie);
 				mediaPlayer.start(); // no need to call prepare(); create() does that for you
 			}
 		});
 		bOk.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				 if (!mediaPlayer.isPlaying())
+				 if (!mediaPlayer.isPlaying()){
+					 setResult(15);
 					 goraa.finish();
+				 }
 			}
 		});
 		for(int i = 0; i < Glowna.liczbaGraczy; i++){

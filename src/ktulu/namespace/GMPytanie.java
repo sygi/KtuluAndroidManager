@@ -15,7 +15,7 @@ public class GMPytanie extends View {
 		bOk.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				goraa.startActivity(new Intent(goraa, GMInfo.class));
+				goraa.startActivityForResult(new Intent(goraa, GMInfo.class), 2);
 				//View sklad = new GMInfo(gora);
 			}
 		});
