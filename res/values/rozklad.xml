@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="miastowi">
+        <item >szeryf</item>
+        <item >dziwka</item>
+        <item> dobry rewolwerowiec</item>
+        <item>sędzia</item>
+        <item>opój</item>
+        <item>burmistrz</item>
+        <item>hazardzista</item>
+        <item>uwodziciel</item>
+        <item >poborca podatkowy</item>
+        <item >agent ubezpieczeniowy</item>
+        <item>ochroniarz</item>
+        <item>kat</item>
+        <item>miastowy</item>
+    </string-array>
+    <string-array name="bandyci">
+        <item>mściciel</item>
+        <item >zły rewolwerowiec</item>
+        <item>szantażysta</item>
+        <item>złodziej</item>
+        <item>szuler</item>
+        <item>herszt</item>
+        <item>bandyta</item>
+    </string-array>
+    <string-array name="indianie">
+        <item>szaman</item>
+        <item>szamanka</item>
+        <item>lornecie oko</item>
+        <item>samotny kojot</item>
+        <item>płonący szał</item>
+        <item>cicha stopa</item>
+        <item>indianin</item>
+        <item>wódz</item>
+    </string-array>
+    <string-array name="ufoki">
+        <item>detektor</item>
+        <item>pożeracz umysłów</item>
+        <item>purpurowa przyssawka</item>
+        <item>zielona macka</item>
+        <item>wielki ufol</item>
+        <item>ufol</item>
+    </string-array>
+    <string-array name="luckyluke">
+        <item>lucky luke</item>
+    </string-array>
+    <string-array name="murzyni">
+        <item>niewolnik kali</item>
+        <item>sprzątaczka</item>
+    </string-array>
+    <string-array name="bogowiepartacze">
+        <item>kaszabara</item>
+        <item>chorągiew</item>
+        <item>ten, którego imienia nie wolno wymawiać</item>
+    </string-array>
+    <string-array name="sklad"> //zmieniajac, poprawic wczytajLiczbePostaci w Rozklad
+        <item>3 3 2 0</item>
+        <item>4 3 2 0</item>
+        <item>4 3 3 0</item>
+        <item>4 4 3 0</item>
+        <item >5 4 3 0</item>
+        <item>6 4 3 0</item>
+        <item>6 4 4 0</item>
+        <item>7 4 4 0</item>
+        <item>7 5 4 0</item>
+        <item>7 5 4 0</item>
+        <item>6 4 5 3</item>
+        <item>7 4 5 3</item>
+        <item>8 4 5 3</item>
+        <item>8 4 6 3</item>
+        <item>9 4 6 3</item>
+        <item>9 4 6 4</item>
+        <item>10 4 6 4</item>
+        <item>10 5 6 4</item>
+        <item>11 5 6 4</item>
+        <item>11 5 7 4</item>
+        <item>12 5 7 4</item>
+        <item>12 6 7 4</item>
+        <item>13 6 7 4</item>
+    </string-array>
+
+    
+</resources>

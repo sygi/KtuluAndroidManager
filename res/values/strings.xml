@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, KtuluAndroidManagerActivity!</string>
+    <string name="app_name">KtuluAndroidManager</string>
+    <string name="powitanie">Witam w programie KtuluAndroidManager 0.1</string>
+    <string-array name="frakcje">
+        <item >miastowi</item>
+        <item>bandyci</item>
+        <item>indianie</item>
+        <item>ufoki</item>
+        <item>janosik</item>
+        <item>lucky luke</item>
+        <item>bogowie partacze</item>
+        <item>murzyni</item> 
+    </string-array>
+
+</resources>
