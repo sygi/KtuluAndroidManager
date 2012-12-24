@@ -2,6 +2,9 @@ package ktulu.namespace;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,19 +28,62 @@ public class UstalFrakcje extends Activity {
     boolean wszystkoOk(){
     	for(int i = 0; i < spinery.length; i++){
     		for(int j = i+1;j<spinery.length; j++){
-    			if (spinery[i].getSelectedItemPosition() == spinery[j].getSelectedItemPosition())
+    			if (spinery[i].getSelectedItemPosition() == spinery[j].getSelectedItemPosition()){
+    				AlertDialog.Builder b = new AlertDialog.Builder(this);
+    				b.setMessage("Frakcja " + spinery[i].getSelectedItem() + " występuje więcej niż raz")
+    				 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+							
+						}
+					})
+					 .show();
     				return false; //dwie te same frakcje
+    			}
     		}
     	}
-    	for(int i = 0; i < graczy.length; i++)
-    		if (graczy[i].getText().toString().equals(""))
+    	for(int i = 0; i < graczy.length; i++){
+    		if (graczy[i].getText().toString().equals("")){
+    			AlertDialog.Builder b = new AlertDialog.Builder(this);
+    			b.setMessage("Nie podano liczebności wszystkich frakcji")
+    			 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				})
+				 .show();
     			 return false;
+    		}
+    		if (Integer.parseInt(graczy[i].getText().toString()) == 0){
+    			AlertDialog.Builder b = new AlertDialog.Builder(this);
+    			b.setMessage("Frakcja " + spinery[i].getSelectedItem() + " ma 0 postaci")
+    			 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				})
+				.show();
+    			return false;
+    		}
+    	}
     	int lacznie = 0;
     	for(int i = 0; i < graczy.length; i++)
     		lacznie += Integer.parseInt(graczy[i].getText().toString());
     	
-    	if (lacznie != Glowna.liczbaGraczy)
-    		return false; //nie sumuje sie do liczby graczy - tak robic? - nie xD
+    	if (lacznie != Rozklad.liczbaGraczy){
+    		AlertDialog.Builder b = new AlertDialog.Builder(this);
+    		b.setMessage("Podane liczby postaci nie sumują się do liczby graczy")
+    		 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			})
+			.show();
+    		return false;
+    	}
     	
     	return true;
     }
