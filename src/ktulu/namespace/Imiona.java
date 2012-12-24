@@ -56,14 +56,14 @@ public class Imiona extends View {
 					System.out.printf("Zadna opcja nie zostala wybrana\n");
 				} else {
 				if (rdbWszyscy.isChecked()){
-					for (int i = 0; i < Glowna.liczbaGraczy; i++){
-						Glowna.gracze[i] = new Gracz(imiona[i].getText().toString());
+					for (int i = 0; i < Rozklad.liczbaGraczy; i++){
+						Rozklad.gracze[i] = new Gracz(imiona[i].getText().toString());
 					}
 				} else {
 					EditText ed = (EditText)gora.findViewById(R.id.editText1);
-					Glowna.gracze[0] = new Gracz(ed.getText().toString());
-					for(int i = 1; i<Glowna.liczbaGraczy; i++)
-						Glowna.gracze[i] = new Gracz();
+					Rozklad.gracze[0] = new Gracz(ed.getText().toString());
+					for(int i = 1; i<Rozklad.liczbaGraczy; i++)
+						Rozklad.gracze[i] = new Gracz();
 				}
 				View prezentacja = new Prezentacja(gora, 0);
 				}

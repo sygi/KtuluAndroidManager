@@ -14,11 +14,13 @@ import android.widget.TextView;
 
 public class Rozklad extends Activity{
 	public static Frakcja[] Frakcje;
-	int liczbaFrakcji;
+	public static int liczbaFrakcji;
 	public static String[] nazwyFrakcji;
+	public static Gracz gracze[];
 	static Activity goraa;
 	String rozklad;
-	public Gracz[] Gracze;
+	//public Gracz[] Gracze;
+	public static int liczbaGraczy;
 	boolean gen;
 	public static void wczytajFrakcje(int nr){
 		System.out.printf("Wczytuje postaci frakcji %s\n", nazwyFrakcji[nr]);
@@ -71,21 +73,21 @@ public class Rozklad extends Activity{
 	}
 	public String[] getNthCharGen(int n){
 		System.out.printf("generujeg %dty wiersz\n", n);
-		String[] t = new String[Glowna.rozklad.liczbaFrakcji];
-		for(int i = 0; i < Glowna.rozklad.liczbaFrakcji; i++){
-			if (Glowna.rozklad.Frakcje[i].nazwyPostaci.length <= n)
+		String[] t = new String[liczbaFrakcji];
+		for(int i = 0; i < liczbaFrakcji; i++){
+			if (Frakcje[i].nazwyPostaci.length <= n)
 				t[i] = "";
 			else 
-				t[i] = Glowna.rozklad.Frakcje[i].nazwyPostaci[n];
+				t[i] = Frakcje[i].nazwyPostaci[n];
 		}
 		return t;
 	}
 	public void generujTablice(){ //dziala tylko dla 3 i 4 frakcji obecnie
 		int maxPostaci = 0;
 		if (gen){
-			System.out.printf("Gfrakcji%d\n",Glowna.rozklad.liczbaFrakcji);
-			for(int i = 0 ; i < Glowna.rozklad.liczbaFrakcji;i++)
-				maxPostaci = Math.max(maxPostaci, Glowna.rozklad.Frakcje[i].liczbaPostaci);
+			System.out.printf("Gfrakcji%d\n",liczbaFrakcji);
+			for(int i = 0 ; i < liczbaFrakcji;i++)
+				maxPostaci = Math.max(maxPostaci, Frakcje[i].liczbaPostaci);
 		} else {
 		for (int i = 0; i < liczbaFrakcji; i++)
 			maxPostaci = Math.max(maxPostaci, Frakcje[i].liczbaPostaci);
@@ -94,28 +96,28 @@ public class Rozklad extends Activity{
 		
 	 if (liczbaFrakcji == 4){
 			TextView t1 = (TextView) goraa.findViewById(R.id.editText1);
-			t1.setText(Glowna.rozklad.Frakcje[0].nazwa);
+			t1.setText(Frakcje[0].nazwa);
 			t1.setWidth(83);
 			TextView t2 = (TextView) goraa.findViewById(R.id.editText2);
-			t2.setText(Glowna.rozklad.Frakcje[1].nazwa);
+			t2.setText(Frakcje[1].nazwa);
 			t2.setWidth(83);
 			TextView t3 = (TextView) goraa.findViewById(R.id.editText3);
-			t3.setText(Glowna.rozklad.Frakcje[2].nazwa);
+			t3.setText(Frakcje[2].nazwa);
 			t3.setWidth(83);
 			TextView t4 = new TextView(goraa);
-			t4.setText(Glowna.rozklad.Frakcje[3].nazwa);
+			t4.setText(Frakcje[3].nazwa);
 			t4.setWidth(83);
 			TableRow row = (TableRow) goraa.findViewById(R.id.tableRow1);
 			row.addView(t4);
 		} else if (liczbaFrakcji == 3) {
 			TextView t1 = (TextView) goraa.findViewById(R.id.editText1);
-			t1.setText(Glowna.rozklad.Frakcje[0].nazwa);
+			t1.setText(Frakcje[0].nazwa);
 			t1.setWidth(110);
 			TextView t2 = (TextView) goraa.findViewById(R.id.editText2);
-			t2.setText(Glowna.rozklad.Frakcje[1].nazwa);
+			t2.setText(Frakcje[1].nazwa);
 			t2.setWidth(110);
 			TextView t3 = (TextView) goraa.findViewById(R.id.editText3);
-			t3.setText(Glowna.rozklad.Frakcje[2].nazwa); //teraz tez widze, ze to zle :P
+			t3.setText(Frakcje[2].nazwa); //teraz tez widze, ze to zle :P
 			t3.setWidth(110);
 		} else if (liczbaFrakcji == 2){
 		} else if (liczbaFrakcji == 5){ //will do later
@@ -132,8 +134,8 @@ public class Rozklad extends Activity{
 	    }
 	}
 	public void wczytajLiczbePostaci(){
-		String[] lista = goraa.getResources().getStringArray(R.array.sklad);
-		rozklad = lista[Glowna.liczbaGraczy - 8];
+		String[] lista = this.getResources().getStringArray(R.array.sklad);
+		rozklad = lista[liczbaGraczy - 8];
 		Scanner czytaj = new Scanner(rozklad);
 		System.out.printf("Wczytuje liczby postaci we frakcji\n");
 		int[] weFrakcji = new int[4];
@@ -159,14 +161,17 @@ public class Rozklad extends Activity{
 		Intent mI = getIntent();
 		gen = mI.getBooleanExtra("gen", false);
 		goraa = this;
+		liczbaGraczy = Glowna.liczbaGraczy;
+		gracze = new Gracz[liczbaGraczy];
 		TextView t = new TextView(this);
-		t.setText("Liczba graczy: " + Glowna.liczbaGraczy);
+		
+		t.setText("Liczba graczy: " + liczbaGraczy);
 		if (!gen){
 		wczytajLiczbePostaci();
 		wczytajPostacie();
 		} else {
 			rozklad = "";
-			for (int i = 0; i < Glowna.rozklad.liczbaFrakcji; i++){
+			for (int i = 0; i < liczbaFrakcji; i++){
 				Frakcje[i].czyWolna = new boolean[Frakcje[i].liczbaPostaci];
 				for(int j = 0; j < Frakcje[i].liczbaPostaci; j++)
 					Frakcje[i].czyWolna[j] = true;
@@ -177,7 +182,7 @@ public class Rozklad extends Activity{
 		TextView rozkl = (TextView)this.findViewById(R.id.textView1);
 		rozkl.setText("Proponowany rozklad: " + rozklad);
 		TextView grac = (TextView)this.findViewById(R.id.textView2);
-		grac.setText("Liczba graczy: " + Glowna.liczbaGraczy);
+		grac.setText("Liczba graczy: " + liczbaGraczy);
 		generujTablice();
 		Button bOk = (Button)this.findViewById(R.id.button2);
 		bOk.setMinWidth(100);
@@ -196,6 +201,14 @@ public class Rozklad extends Activity{
 				View zmiana = new UstalFrakcje(goraa);
 			}
 		});
+	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//pewnie trzeba bedzie przeniesc nizej
+		//default = 0 
+		if (resultCode == 42) {
+			setResult(42);
+			finish();
+		}
 	}
 
 

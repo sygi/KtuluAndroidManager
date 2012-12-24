@@ -36,7 +36,7 @@ public class UstalFrakcje extends View {
     		lacznie += Integer.parseInt(graczy[i].getText().toString());
     	
     	if (lacznie != Glowna.liczbaGraczy)
-    		return false; //nie sumuje sie do liczby graczy - tak robic?
+    		return false; //nie sumuje sie do liczby graczy - tak robic? - nie xD
     	
     	return true;
     }
@@ -106,12 +106,12 @@ public class UstalFrakcje extends View {
 	    bOk.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (wszystkoOk()){
-					Glowna.rozklad.liczbaFrakcji = liczbaF;
-					Glowna.rozklad.nazwyFrakcji = new String[liczbaF];
-					Glowna.rozklad.Frakcje = new Frakcja[liczbaF];
+					Rozklad.liczbaFrakcji = liczbaF;
+					Rozklad.nazwyFrakcji = new String[liczbaF];
+					Rozklad.Frakcje = new Frakcja[liczbaF];
 					for(int i = 0; i < liczbaF; i++){
-						Glowna.rozklad.nazwyFrakcji[i] = spinery[i].getAdapter().getItem(spinery[i].getSelectedItemPosition()).toString();
-						Glowna.rozklad.Frakcje[i] = new Frakcja(Glowna.rozklad.nazwyFrakcji[i], Integer.parseInt(graczy[i].getText().toString()));
+						Rozklad.nazwyFrakcji[i] = spinery[i].getAdapter().getItem(spinery[i].getSelectedItemPosition()).toString();
+						Rozklad.Frakcje[i] = new Frakcja(Rozklad.nazwyFrakcji[i], Integer.parseInt(graczy[i].getText().toString()));
 					}
 					View postac = new UstalPostacie(goraa, 0);
 				}

@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 public class Glowna extends Activity{
 
-	static Rozklad rozklad;
-	static Gracz gracze[];
+	//static Rozklad rozklad;
 	public static int liczbaGraczy;
 	public Activity gora;
 	
@@ -45,6 +44,7 @@ public class Glowna extends Activity{
 		this.setContentView(R.layout.powitanie);
 		Button b = (Button)this.findViewById(R.id.button1);
 		final TextView t = (TextView)this.findViewById(R.id.editText1);
+		setResult(42); //zawsze bede konczyl, jak to zginie
 	    b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -53,7 +53,7 @@ public class Glowna extends Activity{
 				if (liczbaGraczy < 8 || liczbaGraczy > 30)
 					gora.showDialog(0); //poprawic kiedys na fajniejsze dialogi
 				else{
-				gracze = new Gracz[liczbaGraczy];
+				//gracze = new Gracz[liczbaGraczy];
 			//	gora.setContentView(R.layout.main);
 			//	String[] lista = gora.getResources().getStringArray(R.array.sklad);
 				Intent mI = new Intent(gora, Rozklad.class);
@@ -64,6 +64,14 @@ public class Glowna extends Activity{
 				}
 			}
 		});
+	    
+	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//pewnie trzeba bedzie przeniesc nizej
+		//default = 0 
+		if (resultCode == 42) {
+			finish();
+		}
 	}
 	
 }

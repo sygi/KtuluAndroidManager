@@ -34,21 +34,22 @@ public class Postac extends android.view.View {
 
 	String getPostac() {
 		System.out.printf("Losuje postac dla %dtego gracza\n", nrGracza);
-		System.out.printf("miejsca dla %d graczy\n", Glowna.gracze.length);
-		int fr = losuj.nextInt(Glowna.rozklad.liczbaFrakcji);
-		while (Glowna.rozklad.Frakcje[fr].wolnychPostaci == 0) {
-			fr = losuj.nextInt(Glowna.rozklad.liczbaFrakcji);
+		System.out.printf("miejsca dla %d graczy\n", Rozklad.gracze.length);
+		System.out.printf("ma byc %d frakcji a jest %d\n", Rozklad.liczbaFrakcji, Rozklad.Frakcje.length);
+		int fr = losuj.nextInt(Rozklad.liczbaFrakcji);
+		while (Rozklad.Frakcje[fr].wolnychPostaci == 0) {
+			fr = losuj.nextInt(Rozklad.liczbaFrakcji);
 		}
 		System.out.printf("Wylosowalem frakcje %d\n", fr);
-		int a = losuj.nextInt(Glowna.rozklad.Frakcje[fr].liczbaPostaci);
-		while (Glowna.rozklad.Frakcje[fr].czyWolna[a] == false) {
-			a = losuj.nextInt(Glowna.rozklad.Frakcje[fr].liczbaPostaci);
+		int a = losuj.nextInt(Rozklad.Frakcje[fr].liczbaPostaci);
+		while (Rozklad.Frakcje[fr].czyWolna[a] == false) {
+			a = losuj.nextInt(Rozklad.Frakcje[fr].liczbaPostaci);
 		}
-		Glowna.rozklad.Frakcje[fr].czyWolna[a] = false;
-		Glowna.gracze[nrGracza].postac = Glowna.rozklad.Frakcje[fr].nazwyPostaci[a];
-		Glowna.rozklad.Frakcje[fr].wolnychPostaci--;
-		return Glowna.rozklad.Frakcje[fr].nazwyPostaci[a] + " ("
-				+ Glowna.rozklad.Frakcje[fr].nazwa + ")";
+		Rozklad.Frakcje[fr].czyWolna[a] = false;
+		Rozklad.gracze[nrGracza].postac = Rozklad.Frakcje[fr].nazwyPostaci[a];
+		Rozklad.Frakcje[fr].wolnychPostaci--;
+		return Rozklad.Frakcje[fr].nazwyPostaci[a] + " ("
+				+ Rozklad.Frakcje[fr].nazwa + ")";
 	}
 	public static int getStringIdentifier(String name) { //zaklada, ze zna wszystkie postaci!?
 	    return goraa.getResources().getIdentifier(name, "string", goraa.getPackageName());
@@ -72,20 +73,20 @@ public class Postac extends android.view.View {
 		gora.setContentView(R.layout.pokaz);
 		getPostac();
 		TextView powitanie = (TextView)gora.findViewById(R.id.textView1);
-		if (Glowna.gracze[nr].imie == "")
+		if (Rozklad.gracze[nr].imie == "")
 			powitanie.setText("Witaj!");
 		else
-			powitanie.setText("Witaj " + Glowna.gracze[nr].imie + "!");
+			powitanie.setText("Witaj " + Rozklad.gracze[nr].imie + "!");
 		TextView postac = (TextView)gora.findViewById(R.id.textView2);
-		postac.setText("Twoja postać to " + Glowna.gracze[nrGracza].postac); //dodac nazwe frakcji w nawiasie
+		postac.setText("Twoja postać to " + Rozklad.gracze[nrGracza].postac); //dodac nazwe frakcji w nawiasie
 		TextView opis = (TextView)gora.findViewById(R.id.textView3);
-		opis.setText(getOpis(Glowna.gracze[nr].postac));
+		opis.setText(getOpis(Rozklad.gracze[nr].postac));
 		Button bOk = (Button)gora.findViewById(R.id.button1);
 		bOk.setMinimumWidth(150);
 		bOk.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				if (nrGracza == Glowna.liczbaGraczy - 1){
+				if (nrGracza == Rozklad.liczbaGraczy - 1){
 					View pytanie = new GMPytanie(gora);
 				} else {
 					View prez = new Prezentacja(gora, nrGracza + 1);

@@ -15,15 +15,14 @@ public class KtuluAndroidManagerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Intent myI = new Intent(this, Glowna.class);
 	//	View wszystko = new Glowna(this);
-		startActivity(myI);
+		startActivityForResult(myI, 1);
 	}
 
 
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) { 
-		// trzeba bedzie bedzie przeniesc do nizszej klasy potem
 		//default = 0 
-		if (resultCode == 15) {
+		if (resultCode == 42) {
 			finish();
 		}
 	}

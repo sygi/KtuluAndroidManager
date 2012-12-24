@@ -29,12 +29,12 @@ public class UstalPostacie extends View {
 		goraa = gora;
 		gora.setContentView(R.layout.wyborpostaci);
 		TextView t = (TextView)gora.findViewById(R.id.textView1);
-		t.setText("Frakcja " + Glowna.rozklad.nazwyFrakcji[nrFrakcji]);
+		t.setText("Frakcja " + Rozklad.nazwyFrakcji[nrFrakcji]);
 		LinearLayout l = (LinearLayout)gora.findViewById(R.id.lp);
-		spinery = new Spinner[Glowna.rozklad.Frakcje[nrFrakcji].liczbaPostaci];
+		spinery = new Spinner[Rozklad.Frakcje[nrFrakcji].liczbaPostaci];
 		for(int i = 0; i<spinery.length; i++){
 			spinery[i] = new Spinner(gora);
-			String[] postaci = getPostaci(Glowna.rozklad.nazwyFrakcji[nrFrakcji]);
+			String[] postaci = getPostaci(Rozklad.nazwyFrakcji[nrFrakcji]);
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(goraa, android.R.layout.simple_spinner_item, postaci);
 			spinery[i].setAdapter(adapter);
 			spinery[i].setSelection(i);
@@ -48,11 +48,11 @@ public class UstalPostacie extends View {
 			@Override
 			public void onClick(View v) {
 				//na razie nie sprawdzam czy nie ma kolizji
-				Glowna.rozklad.Frakcje[nrFrakcji].nazwyPostaci = new String[Glowna.rozklad.Frakcje[nrFrakcji].liczbaPostaci];
+				Rozklad.Frakcje[nrFrakcji].nazwyPostaci = new String[Rozklad.Frakcje[nrFrakcji].liczbaPostaci];
 				for(int i = 0; i < spinery.length; i++){
-					Glowna.rozklad.Frakcje[nrFrakcji].nazwyPostaci[i] = spinery[i].getSelectedItem().toString();
+					Rozklad.Frakcje[nrFrakcji].nazwyPostaci[i] = spinery[i].getSelectedItem().toString();
 				}
-				if (nrFrakcji == Glowna.rozklad.liczbaFrakcji - 1){
+				if (nrFrakcji == Rozklad.liczbaFrakcji - 1){
 					Intent mI = new Intent(goraa, Rozklad.class);
 					mI.putExtra("gen", true);
 					goraa.startActivity(mI);

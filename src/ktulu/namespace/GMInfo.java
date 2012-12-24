@@ -35,14 +35,14 @@ public class GMInfo extends Activity {
 			@Override
 			public void onClick(View v) {
 				 if (!mediaPlayer.isPlaying()){
-					 setResult(15);
+					 setResult(42);
 					 goraa.finish();
 				 }
 			}
 		});
 		for(int i = 0; i < Glowna.liczbaGraczy; i++){
 			TextView a = new TextView(this);
-			a.setText(Glowna.gracze[i].imie + ": " + Glowna.gracze[i].postac);
+			a.setText(Rozklad.gracze[i].imie + ": " + Rozklad.gracze[i].postac);
 			l.addView(a);
 		}
 		l.addView(bUf);

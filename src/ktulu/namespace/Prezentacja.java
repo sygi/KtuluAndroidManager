@@ -12,13 +12,13 @@ public class Prezentacja extends View {
 		super(gora);
 		goraa = gora;
 		nrGracza = nr;
-		System.out.printf("Będę robił prezentację dla %dtego gracza\nMiejsca dla %d\n", nr,Glowna.gracze.length);
+		System.out.printf("Będę robił prezentację dla %dtego gracza\nMiejsca dla %d\n", nr,Rozklad.gracze.length);
 		gora.setContentView(R.layout.zobacz);
 		TextView powitanie = (TextView)gora.findViewById(R.id.textView1);
-		if (Glowna.gracze[nr].imie == "")
+		if (Rozklad.gracze[nr].imie == "")
 			powitanie.setText("Witaj!");
 		else
-			powitanie.setText("Witaj " + Glowna.gracze[nr].imie + "!");
+			powitanie.setText("Witaj " + Rozklad.gracze[nr].imie + "!");
 		Button bPoznaj = (Button)gora.findViewById(R.id.button1);
 		bPoznaj.setOnClickListener(new View.OnClickListener() {
 			@Override
