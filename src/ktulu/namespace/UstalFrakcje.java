@@ -171,8 +171,22 @@ public class UstalFrakcje extends Activity {
 		btn.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				if (frakcji.getText().toString().equals("")) return;
-				liczbaF = Integer.parseInt(frakcji.getText().toString());
+				if (!frakcji.getText().toString().equals(""))
+					liczbaF = Integer.parseInt(frakcji.getText().toString());
+				else
+					liczbaF = 0;
+				if (liczbaF == 0 || liczbaF >= 6){
+					AlertDialog.Builder b = new AlertDialog.Builder(gora);
+					b.setMessage("Podaje liczbę frakcji z przedziału [1, 5]")
+					 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					})
+					.show();
+					return;
+				}
 				spinery = new Spinner[liczbaF];
 				l.removeAllViews();
 				graczy = new EditText[liczbaF];
