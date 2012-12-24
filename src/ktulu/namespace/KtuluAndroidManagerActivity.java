@@ -13,27 +13,12 @@ public class KtuluAndroidManagerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View wszystko = new Glowna(this);
+		Intent myI = new Intent(this, Glowna.class);
+	//	View wszystko = new Glowna(this);
+		startActivity(myI);
 	}
 
-	protected Dialog onCreateDialog(int x) {
-		if (x == 0) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Liczba graczy powinna wynosić między 8 a 30")
-					.setCancelable(false)
-					.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int id) {
-									dialog.cancel();
-								}
 
-							});
-			AlertDialog alert = builder.create();
-			return alert;
-		}
-		return null;
-	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) { 
 		// trzeba bedzie bedzie przeniesc do nizszej klasy potem

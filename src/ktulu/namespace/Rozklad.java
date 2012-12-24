@@ -3,6 +3,8 @@ package ktulu.namespace;
 import java.util.Scanner;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -10,7 +12,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
-public class Rozklad extends View{
+public class Rozklad extends Activity{
 	public static Frakcja[] Frakcje;
 	int liczbaFrakcji;
 	public static String[] nazwyFrakcji;
@@ -151,13 +153,15 @@ public class Rozklad extends View{
 		}
 		rozklad = rozklad.replaceAll(" 0", "");
 	}
-	public Rozklad(final Activity gora, boolean generated) {
-		super(gora);
-		gen = generated;
-		goraa = gora;
-		TextView t = new TextView(gora);
+	public void onCreate(Bundle savedInstanceState) {
+	//	super(gora);
+		super.onCreate(savedInstanceState);
+		Intent mI = getIntent();
+		gen = mI.getBooleanExtra("gen", false);
+		goraa = this;
+		TextView t = new TextView(this);
 		t.setText("Liczba graczy: " + Glowna.liczbaGraczy);
-		if (!generated){
+		if (!gen){
 		wczytajLiczbePostaci();
 		wczytajPostacie();
 		} else {
@@ -169,27 +173,27 @@ public class Rozklad extends View{
 				rozklad = rozklad + " " + Frakcje[i].liczbaPostaci;
 			}
 		}
-		gora.setContentView(R.layout.sklad);
-		TextView rozkl = (TextView)gora.findViewById(R.id.textView1);
+		this.setContentView(R.layout.sklad);
+		TextView rozkl = (TextView)this.findViewById(R.id.textView1);
 		rozkl.setText("Proponowany rozklad: " + rozklad);
-		TextView grac = (TextView)gora.findViewById(R.id.textView2);
+		TextView grac = (TextView)this.findViewById(R.id.textView2);
 		grac.setText("Liczba graczy: " + Glowna.liczbaGraczy);
 		generujTablice();
-		Button bOk = (Button)gora.findViewById(R.id.button2);
+		Button bOk = (Button)this.findViewById(R.id.button2);
 		bOk.setMinWidth(100);
 	    bOk.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				System.out.printf("Zaakceptowano skład\n");
-				View imiona = new Imiona(gora);
+				View imiona = new Imiona(goraa);
 			}
 		});
-	    Button bZmien = (Button)gora.findViewById(R.id.button1);
+	    Button bZmien = (Button)this.findViewById(R.id.button1);
 	    bZmien.setMaxWidth(150);
 	    bZmien.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				View zmiana = new UstalFrakcje(gora);
+				View zmiana = new UstalFrakcje(goraa);
 			}
 		});
 	}

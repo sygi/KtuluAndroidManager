@@ -1,6 +1,7 @@
 package ktulu.namespace;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -52,7 +53,10 @@ public class UstalPostacie extends View {
 					Glowna.rozklad.Frakcje[nrFrakcji].nazwyPostaci[i] = spinery[i].getSelectedItem().toString();
 				}
 				if (nrFrakcji == Glowna.rozklad.liczbaFrakcji - 1){
-					View sklad = new Rozklad(goraa, true);
+					Intent mI = new Intent(goraa, Rozklad.class);
+					mI.putExtra("gen", true);
+					goraa.startActivity(mI);
+					//View sklad = new Rozklad(goraa, true);
 				} else {
 					View postac = new UstalPostacie(goraa, nrFrakcji+1);
 				}
