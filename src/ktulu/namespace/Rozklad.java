@@ -198,13 +198,20 @@ public class Rozklad extends Activity{
 	    bZmien.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				View zmiana = new UstalFrakcje(goraa);
+				Intent myI = new Intent(goraa, UstalFrakcje.class);
+				goraa.startActivityForResult(myI, 2);
+				//View zmiana = new UstalFrakcje(goraa);
 			}
 		});
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		//pewnie trzeba bedzie przeniesc nizej
 		//default = 0 
+		if (requestCode == 2 && resultCode != 1){ 
+			System.out.printf("Anulowano wybieranie swojego skladu");
+			wczytajLiczbePostaci();
+			wczytajPostacie();
+		}
 		if (resultCode == 42) {
 			setResult(42);
 			finish();

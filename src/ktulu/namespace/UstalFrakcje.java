@@ -2,6 +2,7 @@ package ktulu.namespace;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -10,8 +11,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-public class UstalFrakcje extends View {
-	Activity goraa;
+public class UstalFrakcje extends Activity {
+	Activity gora;
     String[] listaFrakcji;
     Spinner[] spinery;
     String[][] frakcjeS;
@@ -79,20 +80,21 @@ public class UstalFrakcje extends View {
     }*/
 	void dodajFrakcje(int nr){
 		System.out.printf("Dodaje frakcje do okienka\n");
-	    spinery[nr] = new Spinner(goraa);
+	    spinery[nr] = new Spinner(gora);
 	    l.addView(spinery[nr]);
-	    graczy[nr] = new EditText(goraa);
+	    graczy[nr] = new EditText(gora);
 	    graczy[nr].setHint("liczba graczy");
 	    graczy[nr].setInputType(2); //type_class_number
 	    l.addView(graczy[nr]); //nie zawali sie?
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(goraa, android.R.layout.simple_spinner_item, listaFrakcji);
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaFrakcji);
 	    spinery[nr].setAdapter(adapter);
 	    spinery[nr].setSelection(nr);
 	    chosen[nr] = true;
 	}
-	public UstalFrakcje(final Activity gora) {
-		super(gora);
-		goraa = gora;
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//super(gora);
+		gora = this;
 		gora.setContentView(R.layout.ustalf);
 		l = (LinearLayout)gora.findViewById(R.id.frakcje);
 		frakcji = (EditText)gora.findViewById(R.id.editText1);
@@ -113,7 +115,7 @@ public class UstalFrakcje extends View {
 						Rozklad.nazwyFrakcji[i] = spinery[i].getAdapter().getItem(spinery[i].getSelectedItemPosition()).toString();
 						Rozklad.Frakcje[i] = new Frakcja(Rozklad.nazwyFrakcji[i], Integer.parseInt(graczy[i].getText().toString()));
 					}
-					View postac = new UstalPostacie(goraa, 0);
+					View postac = new UstalPostacie(gora, 0);
 				}
 			}
 		});

@@ -53,9 +53,12 @@ public class UstalPostacie extends View {
 					Rozklad.Frakcje[nrFrakcji].nazwyPostaci[i] = spinery[i].getSelectedItem().toString();
 				}
 				if (nrFrakcji == Rozklad.liczbaFrakcji - 1){
-					Intent mI = new Intent(goraa, Rozklad.class);
+					//zamienic na finish()
+					goraa.setResult(1); //wszystko ok
+					goraa.finish();
+					/*Intent mI = new Intent(goraa, Rozklad.class);
 					mI.putExtra("gen", true);
-					goraa.startActivity(mI);
+					goraa.startActivity(mI);*/
 					//View sklad = new Rozklad(goraa, true);
 				} else {
 					View postac = new UstalPostacie(goraa, nrFrakcji+1);
